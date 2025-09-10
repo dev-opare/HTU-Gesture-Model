@@ -1,0 +1,7 @@
+{
+  "name": "Real-Time Sign Language Interpreter",
+  "description": "An advanced web application that uses your camera and the Gemini API to interpret American Sign Language (ASL) and Ghanaian Sign Language (GSL) in real-time, providing instant text translations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
