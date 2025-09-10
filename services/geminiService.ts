@@ -1,14 +1,22 @@
 import { GoogleGenAI } from "@google/genai";
 import type { SignLanguage } from "../types";
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable is not set");
-}
-  
+// Fix: Switched from `import.meta.env.VITE_API_KEY` to `process.env.API_KEY` and initialized the client directly
+// as per the coding guidelines, which assumes the API key is always available.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const handleApiError = (error: any): Error => {
     console.error("Error calling Gemini API:", error);
+    if (error.response?.data?.error?.message) {
+        const lowerCaseMessage = error.response.data.error.message.toLowerCase();
+        if (lowerCaseMessage.includes('quota')) {
+            return new Error("DAILY_QUOTA_EXCEEDED");
+        }
+        if (lowerCaseMessage.includes('resource_exhausted')) {
+            return new Error("RATE_LIMIT_EXCEEDED");
+        }
+    }
+    // Fallback for different error structures
     if (error.message) {
         const lowerCaseMessage = error.message.toLowerCase();
         if (lowerCaseMessage.includes('quota')) {
