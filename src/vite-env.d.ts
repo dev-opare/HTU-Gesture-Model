@@ -1,3 +1,2 @@
-// Fix: Removed the reference to 'vite/client' to resolve a TypeScript error.
-// The application does not use Vite-specific client features like `import.meta.env`,
-// so these types are not strictly required for compilation.
+// Fix: Removed the reference to "vite/client" which was causing a type resolution error.
+// The project does not use `import.meta.env` or other Vite client APIs that would require this type definition.
