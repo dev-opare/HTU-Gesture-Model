@@ -1,1 +1,3 @@
-// Fix: Removed reference to "vite/client" as it was causing an error and is no longer needed.
+// Fix: Removed the reference to 'vite/client' to resolve a TypeScript error.
+// The application does not use Vite-specific client features like `import.meta.env`,
+// so these types are not strictly required for compilation.
